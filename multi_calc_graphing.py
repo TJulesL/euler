@@ -62,12 +62,13 @@ try:
         getcontext().prec = i + 5
 
         # Set's all variables for current iteration
-        decimal_i = Decimal(i)
-        original_function_num = 10 ** decimal_i
-        new_function_num = 10 ** round(decimal_i / 2)
+        original_function_num = 10 ** Decimal(i)
+        new_function_num = Decimal(10 ** round(i / 2))
         new_function_num_minus = -1 * new_function_num
-        if original_function_num == 0:
+
+        if original_function_num == 0.0:
             new_function_num = Decimal(1)
+            original_function_num = Decimal(1)
               
 
         # Takes the time of the new function
@@ -92,21 +93,27 @@ try:
         # Calculates the difference
         difference = (finish2 / finish1) * 100
 
-        # Adds iteration to the list
-        list_iterations.append(i)
+        
+        
+        
 
         # Set a upper bound so that the graph stays clear of any huge spikes
         if difference > 500.0:
             listdifference.append(500)
+            list_iterations.append(i)
         # Set a lower bound so that the graph stays clear of any huge spikes 
         if difference < 50.0:
             listdifference.append(50)
+            list_iterations.append(i)
         # If no huge spikes just add it to the list
-        else: 
+        else:
             listdifference.append((difference))
+            list_iterations.append(i)
+        
+        
+        os.system("cls")
         
         # Clears and print's isnt really needed but for output
-        os.system("cls")
         print(f"new function: {new_function_num} {finish1}")
         print(f"normal function: {original_function_num}  {finish2}")
         print(f"a difference of {difference} percentage between the values {finish2} and {finish1} ")
