@@ -59,7 +59,7 @@ If you look to the left of the graphical representation, you will see a line com
 - lim -x → -∞ = e
 
 
-Now you may be able to see what the new function does. It takes both -x and x and calculates them. -x will be larger than e, and x will be smaller. So what it does is add them together and divide by 2 to get the average. Since both values are "as far away" from Euler as each other, the average will be very close to Euler. Of course, just like when you take the average of 2.6 and 2.8, you won't get 2.7182818... but it will at least be close to 2.6 or 2.8.
+Now you may be able to see what the new function does. It takes both -x and x and calculates them. -x will be larger than e, and x will be smaller. So what it does is add them together and divide by 2 to get the average. Since both values are "as far away" from Euler as each other, the average will be very close to Euler. Of course, just like when you take the average of 2.6 and 2.8, you won't get 2.7182818... but it will at least be closer to 2.7 than 2.6 or 2.8.
 
 It's a very simple change, but it seriously affects performance and accuracy. I will show you how much by running some tests. 
 
