@@ -1,9 +1,13 @@
 from decimal import Decimal, getcontext
-import math
 import time
+import gc
+
+# TODO write lists to a json or h5py file to save on memory 
+# TODO add support for gpu or / and multiprocessing
+# TODO find a better way to measure time / more precise
 
 # Set precision to the highest number needed + 1 (accuracy_check_number + 1)
-getcontext().prec = 601
+getcontext().prec = 101
 # Define the function to compare decimals
 def compare_decimals(num1, num2):
     """
@@ -33,7 +37,7 @@ def compare_decimals(num1, num2):
             matching_digits += 1
         else:
             break
-
+    del str_num1, str_num2, decimal_point1, decimal_point2
     return matching_digits
 
 
@@ -44,21 +48,21 @@ def original_function(x):
 def new_function(x, y): 
     return (((1 + 1 / x) ** x) + ((1 + 1 / y) ** y)) / 2
 
+
+# Garbage collection
+gc.collect()
 # Sets numbers to var's and changes them in to the Decimal module
 # 10 ** 10 is the same as 10 with 10 zero's
-
 original_function_number = Decimal(10 ** 500)
 new_function_number = Decimal(10 ** 250)
 accuracy_check_number = Decimal(10 ** 600)
 
 
 # uses the original function to check later on how accurate the others are by using a much bigger number
-
 accuracy_check = original_function(accuracy_check_number)
 
 
 # notes the time it takes for the original function to execute and be done
-
 starttime = time.time()
 a = original_function(original_function_number)
 stoptime = time.time()
@@ -68,7 +72,6 @@ original_function_time = (stoptime - starttime)
 
 
 # notes the time for the new function
-
 starttime = time.time()
 b = new_function(new_function_number, (-1 * new_function_number))
 stoptime = time.time()
@@ -93,3 +96,6 @@ print("new function accuracy:", compare_decimals(b, accuracy_check))
 
 # Prints out difference
 print(f"difference = {original_function_time - new_function_time}")
+
+#cleans up
+del a, b, accuracy_check, original_function_time, new_function_time, accuracy_check, accuracy_check_number, original_function_number, new_function_number
